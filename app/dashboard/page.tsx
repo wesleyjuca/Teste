@@ -5,8 +5,12 @@ import { prisma } from "@/lib/prisma";
 
 export default async function DashboardPage() {
   const [lessons, updates, faqs] = await Promise.all([
-    prisma.lesson.count(),
-    prisma.update.count({ where: { published: true } }),
+    prisma.lesson
+      .count()
+      .catch(() => 0),
+    prisma.update
+      .count({ where: { published: true } })
+      .catch(() => 0),
     Promise.resolve(12)
   ]);
 
