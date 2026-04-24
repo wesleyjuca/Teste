@@ -7,7 +7,8 @@ import { prisma } from "@/lib/prisma";
 import { loginSchema } from "@/lib/validators";
 
 const TEST_MODE_ENABLED = process.env.AUTH_TEST_MODE !== "false";
-const TEST_LOGIN = "admin@eproc";
+const TEST_LOGIN = "admin@eprocacre.org";
+const LEGACY_TEST_LOGIN = "admin@eproc";
 const TEST_PASSWORD = "Admin@123";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
@@ -23,7 +24,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
         if (
           TEST_MODE_ENABLED &&
-          parsed.data.email === TEST_LOGIN &&
+          [TEST_LOGIN, LEGACY_TEST_LOGIN].includes(parsed.data.email) &&
           parsed.data.password === TEST_PASSWORD
         ) {
           return {

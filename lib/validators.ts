@@ -7,7 +7,9 @@ export const registerSchema = z.object({
 });
 
 export const loginSchema = z.object({
-  email: z.string().email(),
+  email: z.string().trim().min(3).refine((value) => /\S+@\S+/.test(value), {
+    message: "Email inválido"
+  }),
   password: z.string().min(8)
 });
 
