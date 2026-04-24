@@ -1,11 +1,17 @@
 import OpenAI from "openai";
 import { NextResponse } from "next/server";
 
-const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-
 export async function POST(request: Request) {
   const { message, history } = await request.json();
 
+  if (!process.env.OPENAI_API_KEY) {
+    return NextResponse.json(
+      { error: "OPENAI_API_KEY environment variable is not configured." },
+      { status: 500 }
+    );
+  }
+
+  const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
   const completion = await client.chat.completions.create({
     model: "gpt-4o-mini",
     messages: [
