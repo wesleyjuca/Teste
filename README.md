@@ -43,9 +43,9 @@ npm run dev
 
 ## Deploy na Vercel
 1. Importar repositório na Vercel.
-2. Configurar variáveis de ambiente do `.env.example`.
+2. Configurar variáveis de ambiente do `.env.example` (incluindo `AUTH_TRUST_HOST=true` em produção).
 3. Definir build command `npm run build`.
-4. Definir install command `npm install`.
+4. Definir install command `npm install` (o `postinstall` roda `prisma generate` automaticamente).
 5. Definir output padrão Next.js.
 
 ## Scripts CI-ready
