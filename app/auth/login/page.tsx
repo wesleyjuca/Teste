@@ -17,10 +17,16 @@ export default function LoginPage() {
           const result = await signIn("credentials", {
             email: form.get("email"),
             password: form.get("password"),
-            redirect: true,
+            redirect: false,
             callbackUrl: "/dashboard"
           });
-          if (result?.error) setError("Credenciais inválidas");
+
+          if (result?.error) {
+            setError("Credenciais inválidas");
+            return;
+          }
+
+          window.location.href = "/dashboard";
         }}
       >
         <input className="w-full rounded border p-2" name="email" type="email" placeholder="Email" required />
