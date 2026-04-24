@@ -4,18 +4,9 @@ const authConfig = {
   providers: [],
   pages: { signIn: "/auth/login" },
   callbacks: {
-    authorized({ auth, request: { nextUrl } }) {
-      const isLoggedIn = !!auth?.user;
-      const isAuthPage = nextUrl.pathname.startsWith("/auth/");
-
-      if (isAuthPage) return true;
-
-      if (!isLoggedIn) {
-        const loginUrl = new URL("/auth/login", nextUrl.origin);
-        loginUrl.searchParams.set("callbackUrl", nextUrl.href);
-        return Response.redirect(loginUrl);
-      }
-
+    authorized() {
+      // Temporariamente permite acesso sem autenticação.
+      // Reverter para restaurar redirecionamento ao login.
       return true;
     },
     async jwt({ token, user }) {
