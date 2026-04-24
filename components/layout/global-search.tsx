@@ -2,8 +2,9 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import type { Route } from "next";
 
-const pages = [
+const pages: Array<{ label: string; href: Route }> = [
   { label: "Dashboard", href: "/dashboard" },
   { label: "Módulos de Aprendizado", href: "/dashboard/lessons" },
   { label: "Simulador", href: "/simulator" },

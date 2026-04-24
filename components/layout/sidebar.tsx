@@ -1,6 +1,7 @@
 import Link from "next/link";
+import type { Route } from "next";
 
-const links = [
+const links: Array<[label: string, href: Route]> = [
   ["Dashboard", "/dashboard"],
   ["Aprendizado", "/dashboard/lessons"],
   ["Simulador", "/simulator"],
