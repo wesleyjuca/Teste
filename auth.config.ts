@@ -1,6 +1,9 @@
 import type { NextAuthConfig } from "next-auth";
 
+const authSecret = process.env.AUTH_SECRET ?? "dev-only-auth-secret";
+
 const authConfig = {
+  secret: authSecret,
   providers: [],
   pages: { signIn: "/auth/login" },
   callbacks: {
