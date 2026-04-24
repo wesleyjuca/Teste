@@ -1,16 +1,20 @@
 # Apresentação Institucional
 
 ## Descrição oficial
-A Comissão Portal e-Proc Acre é uma iniciativa institucional orientada à modernização da prática jurídica, com foco em capacitação digital, segurança procedimental e eficiência no uso do sistema e-Proc.
+A Comissão de Acompanhamento da Transição de Sistemas do TJAC, em parceria com a OAB Acre, conduz ações de orientação e capacitação para migração ao e-Proc, priorizando segurança procedimental, padronização e acesso qualificado à justiça digital.
 
 ## Missão
-Capacitar a advocacia acreana para atuação digital eficiente, segura e alinhada às exigências processuais contemporâneas.
+Capacitar usuários externos para operação correta do e-Proc no âmbito do PJAC, com base em guias oficiais e práticas recomendadas.
 
 ## Visão
-Ser a principal referência regional em educação aplicada ao e-Proc, promovendo excelência operacional e acesso qualificado à justiça digital.
+Ser a referência estadual em educação aplicada ao e-Proc, apoiando a transição tecnológica com linguagem clara e foco prático.
 
 ## Valores
 - Ética e responsabilidade institucional
-- Inovação com segurança jurídica
-- Cooperação entre advocacia e sistema de justiça
-- Transparência e foco no usuário
+- Clareza operacional
+- Cooperação entre advocacia e Poder Judiciário
+- Transparência na comunicação
+- Aprendizado contínuo
+
+## Fonte-base de conteúdo
+Tutorial “Cadastro Usuário Externo eproc”, Portal eproc TJAC (publicado em novembro de 2024).

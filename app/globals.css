@@ -8,4 +8,9 @@
 
 body {
   @apply bg-surface text-slate-900;
+  background-image:
+    radial-gradient(circle at 8% -10%, #e31b23 0 18%, transparent 19%),
+    radial-gradient(circle at 95% 105%, #e31b23 0 14%, transparent 15%),
+    linear-gradient(135deg, #012e52 0%, #013960 42%, #f5f7fa 42%, #f5f7fa 100%);
+  background-attachment: fixed;
 }
