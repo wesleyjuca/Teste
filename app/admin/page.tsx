@@ -1,3 +1,6 @@
+import { Badge } from "@/components/ui/badge";
+import { Card, CardTitle } from "@/components/ui/card";
+import { PageContainer, PageHeader } from "@/components/ui/layout";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
@@ -13,10 +16,50 @@ export default async function AdminPage() {
   ]);
 
   return (
-    <main className="space-y-6 p-6">
-      <section className="rounded-xl bg-white p-6"><h2 className="font-semibold text-primary">Usuários</h2><ul className="mt-3 space-y-2 text-sm">{users.map((u) => <li key={u.id}>{u.name} • {u.email} • {u.role}</li>)}</ul></section>
-      <section className="rounded-xl bg-white p-6"><h2 className="font-semibold text-primary">Mensagens colaborativas</h2><ul className="mt-3 space-y-2 text-sm">{messages.map((m) => <li key={m.id}>{m.name} ({m.oab}): {m.message}</li>)}</ul></section>
-      <section className="rounded-xl bg-white p-6"><h2 className="font-semibold text-primary">Atualizações</h2><ul className="mt-3 space-y-2 text-sm">{updates.map((u) => <li key={u.id}>{u.title}</li>)}</ul></section>
-    </main>
+    <PageContainer className="space-y-6">
+      <PageHeader title="Painel administrativo" description="Visão rápida dos dados mais recentes de usuários, mensagens e atualizações." />
+
+      <Card>
+        <div className="flex items-center justify-between gap-3">
+          <CardTitle className="text-brand-700">Usuários</CardTitle>
+          <Badge variant="brand">{users.length} registros</Badge>
+        </div>
+        <ul className="mt-3 space-y-2 text-sm text-text-muted">
+          {users.map((u) => (
+            <li key={u.id} className="rounded-md bg-surface-muted px-3 py-2 text-text">
+              {u.name} • {u.email} • {u.role}
+            </li>
+          ))}
+        </ul>
+      </Card>
+
+      <Card>
+        <div className="flex items-center justify-between gap-3">
+          <CardTitle className="text-brand-700">Mensagens colaborativas</CardTitle>
+          <Badge>{messages.length} itens</Badge>
+        </div>
+        <ul className="mt-3 space-y-2 text-sm text-text-muted">
+          {messages.map((m) => (
+            <li key={m.id} className="rounded-md bg-surface-muted px-3 py-2 text-text">
+              {m.name} ({m.oab}): {m.message}
+            </li>
+          ))}
+        </ul>
+      </Card>
+
+      <Card>
+        <div className="flex items-center justify-between gap-3">
+          <CardTitle className="text-brand-700">Atualizações</CardTitle>
+          <Badge variant="success">{updates.length} publicações</Badge>
+        </div>
+        <ul className="mt-3 space-y-2 text-sm text-text-muted">
+          {updates.map((u) => (
+            <li key={u.id} className="rounded-md bg-surface-muted px-3 py-2 text-text">
+              {u.title}
+            </li>
+          ))}
+        </ul>
+      </Card>
+    </PageContainer>
   );
 }

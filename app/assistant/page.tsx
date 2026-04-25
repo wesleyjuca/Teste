@@ -1,5 +1,9 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { PageContainer, PageHeader } from "@/components/ui/layout";
 import { useChatStore } from "@/hooks/use-chat-store";
 import { useState } from "react";
 
@@ -8,13 +12,27 @@ export default function AssistantPage() {
   const [input, setInput] = useState("");
 
   return (
-    <main className="mx-auto max-w-4xl p-6">
-      <h1 className="text-2xl font-bold text-primary">Assistente IA e-Proc</h1>
-      <div className="mt-4 h-[480px] space-y-2 overflow-y-auto rounded-xl bg-white p-4">
+    <PageContainer className="max-w-4xl">
+      <PageHeader
+        title="Assistente IA e-Proc"
+        description="Canal rápido para dúvidas sobre fluxos do sistema, validações de cadastro e boas práticas para protocolo." 
+        actions={<Badge variant="brand">Beta</Badge>}
+      />
+
+      <Card className="h-[480px] space-y-3 overflow-y-auto">
+        {messages.length === 0 ? (
+          <p className="text-sm text-text-muted">Comece a conversa perguntando sobre cadastro, anexação de documentos ou protocolo.</p>
+        ) : null}
         {messages.map((message, index) => (
-          <div key={index} className={message.role === "assistant" ? "text-primary" : "text-slate-700"}>{message.content}</div>
+          <div
+            key={index}
+            className={message.role === "assistant" ? "rounded-md bg-brand-50 p-3 text-brand-700" : "rounded-md bg-surface-muted p-3 text-text"}
+          >
+            {message.content}
+          </div>
         ))}
-      </div>
+      </Card>
+
       <form
         className="mt-4 flex gap-2"
         onSubmit={async (e) => {
@@ -31,9 +49,14 @@ export default function AssistantPage() {
           setInput("");
         }}
       >
-        <input className="flex-1 rounded border p-2" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Faça sua pergunta..." />
-        <button className="rounded bg-primary px-4 py-2 text-white" type="submit">Enviar</button>
+        <input
+          className="flex-1 rounded-md border border-border-subtle bg-surface-elevated px-3 py-2 text-sm text-text placeholder:text-text-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-focus"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Faça sua pergunta..."
+        />
+        <Button type="submit">Enviar</Button>
       </form>
-    </main>
+    </PageContainer>
   );
 }
