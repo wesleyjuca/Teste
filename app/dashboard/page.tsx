@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic";
 
-import { Card } from "@/components/ui/card";
+import { StatCard } from "@/components/ui/card";
+import { PageContainer, PageHeader } from "@/components/ui/layout";
 import { prisma } from "@/lib/prisma";
 
 export default async function DashboardPage() {
@@ -15,10 +16,13 @@ export default async function DashboardPage() {
   ]);
 
   return (
-    <section className="grid gap-4 md:grid-cols-3">
-      <Card title="Lessons" value={lessons} />
-      <Card title="Updates" value={updates} />
-      <Card title="FAQs" value={faqs} />
-    </section>
+    <PageContainer>
+      <PageHeader title="Dashboard" description="Indicadores rápidos da trilha de capacitação e-Proc e do conteúdo institucional publicado." />
+      <section className="grid gap-4 md:grid-cols-3">
+        <StatCard title="Lessons" value={lessons} />
+        <StatCard title="Updates" value={updates} />
+        <StatCard title="FAQs" value={faqs} />
+      </section>
+    </PageContainer>
   );
 }

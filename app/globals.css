@@ -4,13 +4,76 @@
 
 :root {
   color-scheme: light;
+  --surface: 210 43% 98%;
+  --surface-elevated: 0 0% 100%;
+  --surface-muted: 210 38% 95%;
+  --text-primary: 214 66% 16%;
+  --text-muted: 215 20% 37%;
+  --text-inverse: 0 0% 100%;
+  --border-subtle: 214 28% 87%;
+  --border-strong: 214 39% 73%;
+  --focus-ring: 354 80% 52%;
+  --success-bg: 142 54% 92%;
+  --success-fg: 142 63% 23%;
+  --danger-bg: 0 79% 94%;
+  --danger-fg: 0 72% 34%;
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+
+  --space-section: 2.5rem;
+  --space-gutter: 1.5rem;
+  --space-card: 1.25rem;
+
+  --shadow-card: 0 12px 30px -20px rgba(1, 46, 82, 0.45);
+  --shadow-panel: 0 24px 50px -24px rgba(1, 46, 82, 0.5);
 }
 
-body {
-  @apply bg-surface text-slate-900;
-  background-image:
-    radial-gradient(circle at 8% -10%, #e31b23 0 18%, transparent 19%),
-    radial-gradient(circle at 95% 105%, #e31b23 0 14%, transparent 15%),
-    linear-gradient(135deg, #012e52 0%, #013960 42%, #f5f7fa 42%, #f5f7fa 100%);
-  background-attachment: fixed;
+.dark {
+  color-scheme: dark;
+  --surface: 212 45% 10%;
+  --surface-elevated: 212 42% 13%;
+  --surface-muted: 212 34% 19%;
+  --text-primary: 210 35% 94%;
+  --text-muted: 213 18% 75%;
+  --text-inverse: 212 35% 12%;
+  --border-subtle: 212 27% 31%;
+  --border-strong: 212 31% 40%;
+  --focus-ring: 354 80% 58%;
+  --shadow-card: 0 18px 36px -22px rgba(0, 0, 0, 0.85);
+  --shadow-panel: 0 24px 48px -26px rgba(0, 0, 0, 0.9);
+}
+
+@layer base {
+  * {
+    @apply border-border-subtle;
+  }
+
+  body {
+    @apply bg-surface text-text antialiased;
+    background-image:
+      radial-gradient(circle at 8% -10%, rgb(227 27 35 / 0.2) 0 14%, transparent 15%),
+      radial-gradient(circle at 95% 105%, rgb(1 46 82 / 0.16) 0 20%, transparent 21%),
+      linear-gradient(140deg, rgb(1 46 82 / 0.96) 0%, rgb(1 57 96 / 0.92) 38%, hsl(var(--surface)) 38%, hsl(var(--surface)) 100%);
+    background-attachment: fixed;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-text;
+  }
+
+  p {
+    @apply text-text-muted;
+  }
+}
+
+@layer components {
+  .surface-panel {
+    @apply rounded-xl border border-border-subtle bg-surface-elevated shadow-card;
+  }
 }
