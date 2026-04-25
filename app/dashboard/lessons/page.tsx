@@ -6,7 +6,9 @@ import { PageContainer, PageHeader, Section } from "@/components/ui/layout";
 import { prisma } from "@/lib/prisma";
 
 export default async function LessonsPage() {
-  const lessons = await prisma.lesson.findMany({ orderBy: { order: "asc" } });
+  const lessons = await prisma.lesson
+    .findMany({ orderBy: { order: "asc" } })
+    .catch(() => []);
 
   return (
     <PageContainer className="space-y-4">
@@ -17,6 +19,14 @@ export default async function LessonsPage() {
       <Section className="text-sm">
         Trilha oficial baseada no tutorial do Portal eproc TJAC: <strong className="text-text">Cadastro Usuário Externo eproc</strong>.
       </Section>
+      {lessons.length === 0 && (
+        <Card>
+          <CardTitle className="text-brand-700">Nenhuma aula disponível no momento</CardTitle>
+          <CardDescription className="mt-2 text-base leading-relaxed">
+            Não foi possível carregar as aulas agora. Tente novamente em instantes.
+          </CardDescription>
+        </Card>
+      )}
       {lessons.map((lesson) => (
         <Card key={lesson.id}>
           <Badge variant="brand">{lesson.module}</Badge>
