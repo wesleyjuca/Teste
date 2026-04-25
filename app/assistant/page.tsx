@@ -1,5 +1,9 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { PageContainer, PageHeader } from "@/components/ui/layout";
 import { useChatStore } from "@/hooks/use-chat-store";
 import { FormEvent, useMemo, useState } from "react";
 
@@ -129,6 +133,6 @@ export default function AssistantPage() {
           {isLoading ? "Enviando..." : "Enviar"}
         </button>
       </form>
-    </main>
+    </PageContainer>
   );
 }
