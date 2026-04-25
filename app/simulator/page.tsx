@@ -9,6 +9,21 @@ const steps = [
   "Protocole e emita comprovante"
 ];
 
+const commonErrors = [
+  {
+    title: "Anexo obrigatório ausente",
+    correction: "Volte para a etapa de anexos e confira a lista mínima exigida antes de prosseguir."
+  },
+  {
+    title: "Dados das partes incompletos",
+    correction: "Revise CPF/CNPJ, polo processual e representação antes de protocolar."
+  },
+  {
+    title: "Fluxo institucional sem validação NUSAN",
+    correction: "Encaminhe previamente documentos de credenciamento ao NUSAN para perfis institucionais."
+  }
+];
+
 export default function SimulatorPage() {
   const [index, setIndex] = useState(0);
   const [feedback, setFeedback] = useState("");
@@ -41,6 +56,18 @@ export default function SimulatorPage() {
         </div>
         {feedback ? <p className="mt-4 rounded bg-surface p-3 text-sm">{feedback}</p> : null}
       </div>
+
+      <section className="rounded-xl border border-amber-200 bg-amber-50 p-6">
+        <h2 className="text-lg font-semibold text-amber-900">Erros comuns e como corrigir</h2>
+        <ul className="mt-3 space-y-3 text-sm text-amber-950">
+          {commonErrors.map((item) => (
+            <li key={item.title}>
+              <p className="font-semibold">{item.title}</p>
+              <p>{item.correction}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
     </main>
   );
 }

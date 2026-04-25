@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { ContentLevel, PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
@@ -19,115 +19,45 @@ async function main() {
 
   const lessons = [
     {
-      slug: "advogado-cadastro-e-validacao",
-      title: "Advogado — cadastro e validação no e-Proc",
-      module: "ADVOGADO",
+      slug: "fundamentos-cadastro-validacao-externa",
+      title: "Fundamentos — cadastro e validação de usuário externo",
+      module: "FUNDAMENTOS",
       content:
-        "Realize o cadastro no portal eproc do TJAC (menu Cadastre-se Aqui > Cadastrar Advogado). Priorize cadastro com certificado digital para validação automática; sem certificado, conclua pré-cadastro e envie a OAB pelo Fale Conosco para validação do suporte.",
+        "Inicie pelo cadastro correto no e-Proc e escolha o fluxo de validação adequado (com certificado digital ou validação documental pelo suporte).",
       steps: [
-        "Acesse https://eproc1g.tjac.jus.br e selecione Cadastre-se Aqui > Cadastrar Advogado.",
-        "Escolha cadastro com certificado digital (preferencial) ou sem certificado.",
-        "Preencha dados pessoais e finalize o pré-cadastro.",
-        "Se não usar certificado, envie cópia da carteira OAB no menu Fale Conosco.",
-        "Após validação, acesse e mantenha senha/dados cadastrais atualizados."
+        "Acesse o portal do e-Proc e escolha o perfil correto em Cadastre-se Aqui.",
+        "Priorize cadastro com certificado digital para validação imediata.",
+        "Sem certificado, finalize o pré-cadastro e encaminhe documentação exigida no Fale Conosco.",
+        "Acompanhe confirmação do suporte e teste o primeiro acesso.",
+        "Registre internamente a data de habilitação para controle institucional."
       ]
     },
     {
-      slug: "jus-postulandi-cadastro",
-      title: "Jus Postulandi — credenciamento e documentos",
-      module: "JUS POSTULANDI",
+      slug: "operacao-diaria-peticionamento-anexos",
+      title: "Operação diária — peticionamento, anexos e boas práticas",
+      module: "OPERAÇÃO DIÁRIA",
       content:
-        "O cadastro de Jus Postulandi também ocorre no portal do eproc TJAC. Sem certificado digital, o suporte exige documento pessoal com foto e comprovante de residência para validação do perfil.",
+        "A rotina operacional exige consistência entre classe processual, tipo de petição e anexos obrigatórios, com validação final antes do protocolo.",
       steps: [
-        "Acesse https://eproc1g.tjac.jus.br > Cadastre-se Aqui > Cadastrar Jus Postulandi.",
-        "Escolha a modalidade com certificado digital (dispensa validação posterior).",
-        "Caso seja sem certificado, finalize o pré-cadastro normalmente.",
-        "Envie RG/CNH e comprovante de residência pelo Fale Conosco.",
-        "Aguarde validação do suporte e realize primeiro acesso."
+        "Confirme classe processual e competência antes de iniciar o protocolo.",
+        "Nomeie anexos de forma padronizada e mantenha legibilidade dos arquivos.",
+        "Valide assinatura digital e formato aceito pelo sistema.",
+        "Revise polos, partes e assunto processual antes de concluir.",
+        "Emita e arquive comprovante de protocolo com identificação do responsável."
       ]
     },
     {
-      slug: "perito-leiloeiro-administrador-judicial",
-      title: "Perito, Leiloeiro e Administrador Judicial",
-      module: "PERITO / LEILOEIRO / ADMINISTRADOR JUDICIAL",
+      slug: "casos-especiais-perfis-institucionais-nusan",
+      title: "Casos especiais — perfis institucionais e fluxos NUSAN",
+      module: "CASOS ESPECIAIS",
       content:
-        "Para atuação nesses perfis, o tutorial orienta cadastro via serviço CPTEC do TJAC, conforme requisitos específicos de credenciamento para auxiliares da Justiça.",
+        "Perfis institucionais (ente público, sociedade, núcleo de prática e unidade externa) seguem trilha documental específica com envio ao NUSAN.",
       steps: [
-        "Acesse https://www.tjac.jus.br/servicos/cptec/.",
-        "Verifique normativos e exigências para sua categoria profissional.",
-        "Preencha o cadastro solicitado pelo serviço correspondente.",
-        "Anexe documentação exigida e dados de contato válidos.",
-        "Acompanhe comunicações de validação e orientações de acesso."
-      ]
-    },
-    {
-      slug: "procurador-chefe-entidade",
-      title: "Procurador-Chefe de Entidade — fluxo NUSAN",
-      module: "PROCURADOR-CHEFE DE ENTIDADE",
-      content:
-        "Credenciamento por envio documental ao NUSAN (nusan@tjac.jus.br), sem necessidade de validação presencial, conforme tutorial do TJAC.",
-      steps: [
-        "Enviar portaria de nomeação do Procurador-Chefe (ou nomeação como Procurador, se comissionado).",
-        "Anexar cópia da carteira da OAB do Procurador-Chefe.",
-        "Informar telefone e e-mail para recebimento de login/senha.",
-        "Encaminhar tudo para nusan@tjac.jus.br.",
-        "Aguardar retorno do suporte com dados de acesso."
-      ]
-    },
-    {
-      slug: "advogado-titular-sociedade",
-      title: "Advogado Titular de Sociedade de Advogados",
-      module: "ADVOGADO TITULAR DE SOCIEDADE DE ADVOGADOS",
-      content:
-        "O sócio majoritário realiza o pedido de credenciamento da sociedade de advogados enviando documentação societária e cadastral ao NUSAN.",
-      steps: [
-        "Reunir contrato social e últimas alterações da sociedade.",
-        "Anexar carteira OAB do sócio majoritário responsável pelo cadastro.",
-        "Anexar cartão CNPJ e certidão OAB do registro da sociedade.",
-        "Informar telefone e e-mail para envio de credenciais.",
-        "Enviar documentação para nusan@tjac.jus.br."
-      ]
-    },
-    {
-      slug: "responsavel-unidade-externa",
-      title: "Responsável por Unidade Externa",
-      module: "RESPONSÁVEL UNIDADE EXTERNA",
-      content:
-        "A unidade externa encaminha termo de credenciamento, termo de posse e documentos pessoais do responsável ao NUSAN para cadastro no eproc do PJAC.",
-      steps: [
-        "Preencher e assinar termo de credenciamento.",
-        "Anexar termo de posse do responsável pela unidade.",
-        "Anexar documento com foto, CPF e OAB (quando houver).",
-        "Enviar documentação para nusan@tjac.jus.br.",
-        "Aguardar recebimento de dados de acesso e manual de utilização."
-      ]
-    },
-    {
-      slug: "representante-legal-pj",
-      title: "Representante Legal da Pessoa Jurídica",
-      module: "REPRESENTANTE LEGAL DA PESSOA JURÍDICA",
-      content:
-        "Cadastro realizado no próprio eproc (Cadastre-se Aqui > Cadastrar Representante Legal de PJ), seguindo o manual específico da Pessoa Jurídica indicado no tutorial.",
-      steps: [
-        "Acessar https://eproc1g.tjac.jus.br e escolher Cadastrar Representante Legal de PJ.",
-        "Preencher dados da pessoa física e da pessoa jurídica vinculada.",
-        "Conferir dados de contato e informações de representação legal.",
-        "Seguir o Manual do Representante Legal para etapas complementares.",
-        "Finalizar habilitação e validar acesso ao perfil cadastrado."
-      ]
-    },
-    {
-      slug: "advogado-titular-escritorio-nucleo-pratica",
-      title: "Advogado-Titular de Escritório/Núcleo de Prática Jurídica",
-      module: "ESCRITÓRIO/NÚCLEO DE PRÁTICA JURÍDICA",
-      content:
-        "A habilitação da instituição de ensino ocorre por envio de documentos ao NUSAN, incluindo nomeações e OAB do advogado titular. O coordenador deve estar previamente cadastrado como advogado no eproc.",
-      steps: [
-        "Anexar ato de nomeação/posse do Reitor.",
-        "Anexar portaria/ato de nomeação do coordenador do Escritório de Prática Jurídica.",
-        "Anexar OAB do advogado que atuará como titular.",
-        "Informar CNPJ (se houver), telefone e e-mail da instituição.",
-        "Enviar documentação para nusan@tjac.jus.br e aguardar instruções de acesso."
+        "Identifique o tipo de perfil institucional e a base normativa aplicável.",
+        "Monte dossiê com portarias, atos de nomeação e documentos de representação.",
+        "Valide OAB/CPF/CNPJ antes do envio para evitar pendências.",
+        "Encaminhe documentação para nusan@tjac.jus.br com contato institucional ativo.",
+        "Acompanhe retorno do NUSAN e mantenha histórico de credenciais recebidas."
       ]
     }
   ];
@@ -152,6 +82,93 @@ async function main() {
         content: lesson.content,
         steps: lesson.steps,
         videoUrl: null
+      }
+    });
+  }
+
+  const editorialReviewedAt = new Date("2026-04-20T00:00:00.000Z");
+
+  const faqItems = [
+    {
+      question: "Posso protocolar sem certificado digital?",
+      answer:
+        "Sim. O pré-cadastro pode ser concluído sem certificado, mas a liberação depende de validação documental pelo suporte competente.",
+      level: ContentLevel.FUNDAMENTOS,
+      order: 1,
+      normativeSource: "Manual de Cadastro de Usuário Externo e-Proc/TJAC"
+    },
+    {
+      question: "Qual a principal causa de indeferimento no peticionamento inicial?",
+      answer:
+        "Divergência entre classe processual, tipo de petição e anexos obrigatórios. A conferência final reduz indeferimentos por erro formal.",
+      level: ContentLevel.OPERACAO_DIARIA,
+      order: 2,
+      normativeSource: "Boas práticas operacionais de protocolo no e-Proc/TJAC"
+    },
+    {
+      question: "Como credenciar perfis institucionais com fluxo NUSAN?",
+      answer:
+        "É necessário encaminhar documentação de representação institucional e dados de contato para nusan@tjac.jus.br, observando o perfil solicitado.",
+      level: ContentLevel.CASOS_ESPECIAIS,
+      order: 3,
+      normativeSource: "Fluxo NUSAN para perfis institucionais — TJAC"
+    }
+  ];
+
+  for (const item of faqItems) {
+    await prisma.faqItem.upsert({
+      where: { question: item.question },
+      update: {
+        answer: item.answer,
+        level: item.level,
+        order: item.order,
+        editorialReviewedAt,
+        normativeSource: item.normativeSource
+      },
+      create: {
+        ...item,
+        editorialReviewedAt
+      }
+    });
+  }
+
+  const checklistItems = [
+    {
+      title: "Conferir dados cadastrais antes da validação",
+      description: "Revise nome, CPF e e-mail para evitar bloqueio ou duplicidade de acesso.",
+      level: ContentLevel.FUNDAMENTOS,
+      order: 1,
+      normativeSource: "Manual de Cadastro de Usuário Externo e-Proc/TJAC"
+    },
+    {
+      title: "Validar anexos e assinatura antes de protocolar",
+      description: "Garanta legibilidade, tipo documental correto e assinatura digital compatível com o sistema.",
+      level: ContentLevel.OPERACAO_DIARIA,
+      order: 2,
+      normativeSource: "Boas práticas operacionais de protocolo no e-Proc/TJAC"
+    },
+    {
+      title: "Confirmar documentação institucional para NUSAN",
+      description: "Inclua ato de nomeação, documento profissional e contato oficial para retorno de credenciais.",
+      level: ContentLevel.CASOS_ESPECIAIS,
+      order: 3,
+      normativeSource: "Fluxo NUSAN para perfis institucionais — TJAC"
+    }
+  ];
+
+  for (const item of checklistItems) {
+    await prisma.operationalChecklistItem.upsert({
+      where: { title: item.title },
+      update: {
+        description: item.description,
+        level: item.level,
+        order: item.order,
+        editorialReviewedAt,
+        normativeSource: item.normativeSource
+      },
+      create: {
+        ...item,
+        editorialReviewedAt
       }
     });
   }

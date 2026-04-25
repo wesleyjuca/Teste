@@ -13,6 +13,12 @@ enum Role {
   USER
 }
 
+enum ContentLevel {
+  FUNDAMENTOS
+  OPERACAO_DIARIA
+  CASOS_ESPECIAIS
+}
+
 model User {
   id            String         @id @default(cuid())
   name          String
@@ -37,6 +43,30 @@ model Lesson {
   createdAt   DateTime         @default(now())
   updatedAt   DateTime         @updatedAt
   progresses  LessonProgress[]
+}
+
+model FaqItem {
+  id                  String       @id @default(cuid())
+  question            String       @unique
+  answer              String
+  level               ContentLevel
+  order               Int          @default(0)
+  editorialReviewedAt DateTime
+  normativeSource     String
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
+}
+
+model OperationalChecklistItem {
+  id                  String       @id @default(cuid())
+  title               String       @unique
+  description         String
+  level               ContentLevel
+  order               Int          @default(0)
+  editorialReviewedAt DateTime
+  normativeSource     String
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
 }
 
 model LessonProgress {
